@@ -39,7 +39,7 @@ $$
 
 と書いてあって，1点で2回微分可能ってだけで2次近似できるんだっけ？　と気になったので自分で証明してみた[^1]．
 
-[^1]:笠原『微分積分学』，杉浦『解析入門』，小平『解析入門』，黒田『微分積分』をざっとみた限り，上の命題は載ってなさそうだった．杉浦と小平についてはヘッセ行列自体載ってない．黒田についてはヘッセ行列も載っていて，上の命題も $f$ が $C^3$-級の場合 (テイラーの公式) は載っていたが，$C^3$-級を仮定しない場合については載っていなかった．
+[^1]:笠原『微分積分学』，杉浦『解析入門』，小平『解析入門』，黒田『微分積分』をざっとみた限り，上の命題は載ってなさそうだった．杉浦と小平についてはヘッセ行列自体載ってない．黒田についてはヘッセ行列も載っていて，2次近似についても $f$ が $C^3$-級の場合 (テイラーの公式) は載っていたが，$C^3$-級を仮定しない場合については載っていなかった．
 
 # 微分可能性と記号の定義
 
@@ -222,117 +222,112 @@ $$
 
 # 多変数の場合
 
-多変数の場合はロピタルの定理が使えないので証明がちょっと面倒になる．
+多変数の場合はロピタルの定理が使えないので証明がちょっと面倒になる．証明には次の多変数関数の平均値の定理を使う．
 
-$C^1$-級を仮定してよいなら，次の積分公式が使える (証明の一部に問題あり)．
-
-**定理** (積分公式)[^3] $\enspace$ $f(\bm{x})$ が領域 $D$ 上で $C^1$-級なら，
-
-[^3]:笠原 定理 5.17
-
-$$
-\begin{equation}
-    f(\bm{x}) - f(\bm{x}^*) = \left(\int_0^1 \nabla f(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*).
-\end{equation}
-$$
-
-ただし，ベクトル値関数の定積分は各成分毎の定積分を成分とするベクトルであり，
+**定理** (平均値の定理)[^3] $\enspace$ $f(\bm{x})$ は領域 $D$ 上で定義されているとし，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分が $D$ に属するものとする．$f(\bm{x})$ が $D$ で微分可能なら，
 
 $$
 \begin{equation*}
-    \int_0^1 \nabla f(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt = 
-    \begin{pmatrix}
-        {\displaystyle \int_0^1 \frac{\partial f}{\partial x_1}(\bm{x}^* + t(\bm{x} - \bm{x}^*))} dt \\
-        \vdots \\
-        {\displaystyle \int_0^1 \frac{\partial f}{\partial x_n}(\bm{x}^* + t(\bm{x} - \bm{x}^*))} dt \\
-    \end{pmatrix}
+    f(\bm{x}) - f(\bm{x}^*) = \nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)
 \end{equation*}
 $$
 
-である．
+をみたす $\theta$ $(0 < \theta < 1)$ が存在する．
 
-**命題** $\enspace$ 領域 $D$ で定義された関数 $f$ が $C^1$-級で，$x^* \in D$ で2回微分可能であるとする．このとき
+[^3]:笠原 定理 5.16.
+
+**命題** $\enspace$ 領域 $D$ で定義された関数 $f$ が $D$ 上微分可能で，$x^* \in D$ で2回微分可能であるとする．このとき
 
 $$
-\begin{align}
+\begin{align*}
     & f(\bm{x}) = f(\bm{x}^*) + \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) + \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + g(\bm{x}), \\
     & \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2} = 0.
-\end{align}
-$$
-
-**証明** $\enspace$ $f$ は $x^*$ で2回微分可能なので
-
-$$
-\begin{align*}
-    & \nabla f(\bm{x}) = \nabla f(\bm{x}^*) + \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + \bm{h}(\bm{x}), \\
-    & \lim_{\bm{x} \to \bm{x}^*} \frac{\bm{h}(\bm{x})}{\|\bm{x} - \bm{x}^*\|} = \bm{0}
 \end{align*}
 $$
 
-が成り立つ．積分公式から
+**証明** $\enspace$
+
+$$
+\begin{equation*}
+    g(\bm{x}) = f(\bm{x}) - f(\bm{x}^*) - \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
+\end{equation*}
+$$
+
+とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $U_\varepsilon(\bm{x}^*) \subset D$ となる $\varepsilon > 0$ が存在する[^4]．そのような $\varepsilon$ を1つ選び $U = U_\varepsilon(\bm{x}^*)$ とする．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
 
 $$
 \begin{align*}
-    & f(\bm{x}) - f(\bm{x}^*) \\
-    & = \left(\int_0^1 \nabla f(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \left(\int_0^1 (\nabla f(\bm{x}^*) + t \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \left(\nabla f(\bm{x}^*) + \int_0^1 t \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) dt + \int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} (\nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} ((\nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*))^\mathrm{T} \\
-    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
-    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)
+    & g(\bm{x}) \\
+    & = g(\bm{x}^*) + \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{\theta}{2} (\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & \qquad - \frac{\theta}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & \qquad - \frac{\theta}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right)^\mathrm{T} (\bm{x} - \bm{x}^*)
 \end{align*}
 $$
 
-が成り立つ．
+をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能なので $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^5]
 
 $$
 \begin{equation*}
-    g(\bm{x}) = \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)
+    g(\bm{x}) = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 \end{equation*}
 $$
 
-とすると，
+である．$\bm{x} \in U$ 毎に上の式が成り立つような $\theta$ が存在するので，各 $\bm{x} \in U$ に対して，上の式が成り立つような $\theta$ を1つ選び $\theta(\bm{x})$ とする．
+
+上の式の右辺の各項を成分で表すと
 
 $$
 \begin{align*}
-    \left|\frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}\right|
-    & = \frac{\displaystyle \left|\left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)\right|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & = \frac{\displaystyle \left|\sum_{i = 1}^n \left(\int_0^1 h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right) (x_i - x^*_i)\right|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & \leq \frac{\displaystyle \sum_{i = 1}^n \left|\int_0^1 h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right| |x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & \leq \frac{\displaystyle \sum_{i = 1}^n \left(\int_0^1 |h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))| dt \right) |x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & = \sum_{i = 1}^n \left(\int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|} dt \right) \frac{|x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|} \\
-    & \leq \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|} dt \\
-    & = \sum_{i = 1}^n \int_0^1 |t| \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt \\
-    & \leq \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt \quad \text{(*)}
+    & (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \sum_{i = 1}^n \left(\frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*)\right) (x_i - x^*_i),
 \end{align*}
 $$
 
-である．$h_i$ $(i = 1, \cdots, n)$ は連続であるから，ある $t^*$ $(0 \leq t^* \leq 1)$ が存在して
+$$
+\begin{align*}
+    & \theta(\bm{x}) (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
+    & = \sum_{i = 1}^n \left(\sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i)
+\end{align*}
+$$
+
+となるので
+
+$$
+\begin{align*}
+    & \left|\frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
+    & = \left|\frac{\displaystyle (\nabla f(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta(\bm{x}) (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
+    & = \left|\sum_{i = 1}^n \frac{\displaystyle \left(\frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i)}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
+    & = \left|\sum_{i = 1}^n \frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|} \frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|}\right| \left|\frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & = \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & = \sum_{i = 1}^n \theta(\bm{x}) \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
+    & = \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} ((\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \bm{x}^*)}{\|(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \bm{x}^*\|}\right|
+\end{align*}
+$$
+
+である．$f$ は $\bm{x}^*$ で2回微分可能であるから
 
 $$
 \begin{equation*}
-    \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt
-    = \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t^*(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) - \bm{x}^*\|}
+    \lim_{\bm{x} \to \bm{x}^*} \frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*)}{\|\bm{x} - \bm{x}^*\|} = 0
 \end{equation*}
 $$
 
-である．$\displaystyle \lim_{\bm{x} \to \bm{x}^*} \frac{|h_i(\bm{x})|}{\|\bm{x} - \bm{x}^*\|} = 0$ であり，$\displaystyle \lim_{\bm{x} \to \bm{x}^*} (\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) = \bm{x}^*$ であるから，
+であり，$\bm{x} \to \bm{x}^*$ のとき $(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) \to \bm{x}^*$ であるから，上の不等式の最右辺は $\bm{x} \to \bm{x}^*$ のとき $0$ に収束する．よって
 
 $$
 \begin{equation*}
-    \lim_{\bm{x} \to \bm{x}^*} \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t^*(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} = 0.
+    \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2} = 0
 \end{equation*}
 $$
 
-よって
+である．$\enspace$ (証明終)
 
-$$
-\begin{equation*}
-    \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}
-\end{equation*}
-$$
-
-である ((*) の右辺は広義積分だが，収束するか未確認)．
+[^4]:$U_\varepsilon(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \varepsilon \}$.
+[^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
