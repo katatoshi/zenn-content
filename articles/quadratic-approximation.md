@@ -222,11 +222,9 @@ $$
 
 # 多変数の場合
 
-多変数の場合はロピタルの定理が使えないので照明がちょっと面倒になる．
+多変数の場合はロピタルの定理が使えないので証明がちょっと面倒になる．
 
-！以下の議論は照明が誤っているので一旦保留．コミットだけはしておく．
-
-$C^1$-級を仮定してよいなら，次の積分公式が使えるので割と簡単に証明できる．
+$C^1$-級を仮定してよいなら，次の積分公式が使える (証明の一部に問題あり)．
 
 **定理** (積分公式)[^3] $\enspace$ $f(\bm{x})$ が領域 $D$ 上で $C^1$-級なら，
 
@@ -271,20 +269,20 @@ $$
 \end{align*}
 $$
 
-が成り立つ．積分公式から (！以下の式変形は誤り．$\bm{h}$ を積分の外に出せないのに出している)
+が成り立つ．積分公式から
 
 $$
 \begin{align*}
     & f(\bm{x}) - f(\bm{x}^*) \\
     & = \left(\int_0^1 \nabla f(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \left(\int_0^1 (\nabla f(\bm{x}^*) + t \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \left(\nabla f(\bm{x}^*) + \int_0^1 t \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) dt + \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \left(\nabla f(\bm{x}^*) + \int_0^1 t \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) dt + \int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} (\nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad+ \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} ((\nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*))^\mathrm{T} \\
-    & \qquad+ \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
-    & \qquad+ \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)
+    & \qquad + \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)
 \end{align*}
 $$
 
@@ -292,7 +290,7 @@ $$
 
 $$
 \begin{equation*}
-    g(\bm{x}) = \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)
+    g(\bm{x}) = \left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)
 \end{equation*}
 $$
 
@@ -301,20 +299,40 @@ $$
 $$
 \begin{align*}
     \left|\frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}\right|
-    & = \frac{|\bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & = \frac{\displaystyle \left|\sum_{i = 1}^n h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*)) (x_i - x^*_i)\right|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & \leq \frac{\displaystyle \sum_{i = 1}^n |h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))| |x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|^2} \\
-    & = \displaystyle \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|} \frac{|x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|} \\
-    & \leq \displaystyle \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|}
+    & = \frac{\displaystyle \left|\left(\int_0^1 \bm{h}(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right)^\mathrm{T} (\bm{x} - \bm{x}^*)\right|}{\|\bm{x} - \bm{x}^*\|^2} \\
+    & = \frac{\displaystyle \left|\sum_{i = 1}^n \left(\int_0^1 h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right) (x_i - x^*_i)\right|}{\|\bm{x} - \bm{x}^*\|^2} \\
+    & \leq \frac{\displaystyle \sum_{i = 1}^n \left|\int_0^1 h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*)) dt \right| |x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|^2} \\
+    & \leq \frac{\displaystyle \sum_{i = 1}^n \left(\int_0^1 |h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))| dt \right) |x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|^2} \\
+    & = \sum_{i = 1}^n \left(\int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|} dt \right) \frac{|x_i - x^*_i|}{\|\bm{x} - \bm{x}^*\|} \\
+    & \leq \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|\bm{x} - \bm{x}^*\|} dt \\
+    & = \sum_{i = 1}^n \int_0^1 |t| \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt \\
+    & \leq \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt \quad \text{(*)}
 \end{align*}
 $$
 
-であるから
+である．$h_i$ $(i = 1, \cdots, n)$ は連続であるから，ある $t^*$ $(0 \leq t^* \leq 1)$ が存在して
 
 $$
 \begin{equation*}
-    \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2} = 0
+    \sum_{i = 1}^n \int_0^1 \frac{|h_i(\bm{x}^* + t(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} dt
+    = \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t^*(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) - \bm{x}^*\|}
 \end{equation*}
 $$
 
-である．$\enspace$ (証明終)
+である．$\displaystyle \lim_{\bm{x} \to \bm{x}^*} \frac{|h_i(\bm{x})|}{\|\bm{x} - \bm{x}^*\|} = 0$ であり，$\displaystyle \lim_{\bm{x} \to \bm{x}^*} (\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) = \bm{x}^*$ であるから，
+
+$$
+\begin{equation*}
+    \lim_{\bm{x} \to \bm{x}^*} \sum_{i = 1}^n \frac{|h_i(\bm{x}^* + t^*(\bm{x} - \bm{x}^*))|}{\|(\bm{x}^* + t^*(\bm{x} - \bm{x}^*)) - \bm{x}^*\|} = 0.
+\end{equation*}
+$$
+
+よって
+
+$$
+\begin{equation*}
+    \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}
+\end{equation*}
+$$
+
+である ((*) の右辺は広義積分だが，収束するか未確認)．
