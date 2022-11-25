@@ -1,5 +1,5 @@
 ---
-title: "2回微分可能なら2次近似可能であることについての証明"
+title: "1点で2回微分可能なら2次近似できることの証明"
 emoji: "📝"
 type: "tech"
 topics:
@@ -37,9 +37,9 @@ $$
 
 > と書ける．
 
-と書いてあって，1点で2回微分可能ってだけで2次近似できるんだっけ？　と気になったので自分で証明してみた[^1]．
+と書いてあって，1点で2回微分可能ってだけで2次近似できるんだっけ？　と気になったので証明してみた[^1]．
 
-[^1]:笠原『微分積分学』，杉浦『解析入門』，小平『解析入門』，黒田『微分積分』をざっとみた限り，上の命題は載ってなさそうだった．杉浦と小平についてはヘッセ行列自体載ってない．黒田についてはヘッセ行列も載っていて，2次近似についても $f$ が $C^3$-級の場合 (テイラーの公式) は載っていたが，$C^3$-級を仮定しない場合については載っていなかった．
+[^1]:笠原『微分積分学』，杉浦『解析入門』，小平『解析入門』，黒田『微分積分』をざっと調べた限り，この命題は載ってなさそうだった．笠原にはヘッセ行列は載っていたが，2次近似については載っていなかった．杉浦，小平に関してはヘッセ行列すら載っていなかった．黒田にはヘッセ行列と2次近似についても載っていたが，$C^3$-級を仮定している (テイラーの公式)．
 
 # 微分可能性と記号の定義
 
@@ -48,10 +48,10 @@ $$
 $D$ を $\bm{R}^n$ の領域 (連結な開集合) とし，$f: D \to \bm{R}$ とする．$f$ が $\bm{x}^* \in D$ で (1回) 微分可能であるとは，あるベクトル $\bm{a} \in \bm{R}$ が存在して
 
 $$
-\begin{align}
+\begin{align*}
     & f(\bm{x}) = f(\bm{x}^*) + \bm{a}^\mathrm{T} (\bm{x} - \bm{x}^*) + g(\bm{x}), \\
     & \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|} = 0
-\end{align}
+\end{align*}
 $$
 
 が成り立つことである．このとき
@@ -65,9 +65,7 @@ $$
 \end{pmatrix}
 $$
 
-である．
-
-ベクトル
+である．ベクトル
 
 $$
 \nabla f(\bm{x}) =
@@ -78,30 +76,27 @@ $$
 \end{pmatrix}
 $$
 
-を $f$ の勾配ベクトルと呼ぶ．勾配ベクトルの記号を用いれば $(1)$ は
+を $f$ の勾配ベクトルと呼ぶ．勾配ベクトルの記号を用いれば $f$ が $\bm{x}^*$ で微分可能であることは
 
 $$
-\begin{equation}
-    f(\bm{x}) = f(\bm{x}^*) + \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + g(\bm{x})
-\end{equation}
+\begin{align*}
+    & f(\bm{x}) = f(\bm{x}^*) + \nabla f(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + g(\bm{x}), \\
+    & \lim_{\bm{x} \to \bm{x}^*} \frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|} = 0
+\end{align*}
 $$
 
 と書ける．
 
-微分可能性の定義から，$f$ が $\bm{x}^*$ で微分可能ならば $\bm{x}^*$ で連続であることがわかる．
-
 領域 $D$ の各点で微分可能な関数 $f: D \to \bm{R}$ が $\bm{x}^* \in D$ で2回微分可能であるとは，$f$ のすべての偏導関数 $\frac{\partial f}{\partial x_i}$ $(i = 1, \cdots, n)$ が $\bm{x}^*$ で微分可能，すなわち，すべての $i = 1, \cdots, n$ について
 
 $$
-\begin{align}
+\begin{align*}
     & \frac{\partial f}{\partial x_i}(\bm{x}) = \frac{\partial f}{\partial x_i}(\bm{x}^*) + \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\bm{x} - \bm{x}^*) + g_i(\bm{x}), \\
     & \lim_{\bm{x} \to \bm{x}^*} \frac{g_i(\bm{x})}{\|\bm{x} - \bm{x}^*\|} = 0
-\end{align}
+\end{align*}
 $$
 
-が成り立つことである．
-
-行列
+が成り立つことである．行列
 
 $$
 \nabla^2 f(\bm{x}) =
@@ -117,7 +112,7 @@ $$
 \end{pmatrix}
 $$
 
-を $f$ のヘッセ行列と呼ぶ[^2]．$(4)$ をベクトルにまとめると
+を $f$ のヘッセ行列と呼ぶ[^2]．2回微分可能の条件をベクトルにまとめると
 
 [^2]:$\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial}{\partial x_j}\left(\frac{\partial f}{\partial x_i}\right)$．
 
@@ -168,12 +163,13 @@ $$
 \end{align*}
 $$
 
-となるので，$\bm{g}(\bm{x}) = (g_1(\bm{x}), \cdots, g_n(\bm{x}))^\mathrm{T}$ として，勾配ベクトルとヘッセ行列を用いれば $(4)$ は
+となるので，$\bm{g}(\bm{x}) = (g_1(\bm{x}), \cdots, g_n(\bm{x}))^\mathrm{T}$ として，勾配ベクトルとヘッセ行列を用いれば $f$ が $\bm{x}^*$ で2回微分可能であることは
 
 $$
-\begin{equation}
-    \nabla f(\bm{x}) = \nabla f(\bm{x}^*) + \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + \bm{g}(\bm{x})
-\end{equation}
+\begin{align*}
+    & \nabla f(\bm{x}) = \nabla f(\bm{x}^*) + \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) + \bm{g}(\bm{x}), \\
+    & \lim_{\bm{x} \to \bm{x}^*} \frac{\bm{g}(\bm{x})}{\|\bm{x} - \bm{x}^*\|} = \bm{0}
+\end{align*}
 $$
 
 と書ける．
@@ -185,18 +181,16 @@ $$
 **命題** $\enspace$ 区間 $D = (a, b)$ $(a < x^* < b)$ で定義された関数 $f$ が $D$ 上微分可能で，$x^*$ で2回微分可能であるとする．このとき
 
 $$
-\begin{align}
+\begin{align*}
     & f(x) = f(x^*) + f^\prime(x^*) (x - x^*) + \frac{1}{2} f^{\prime\prime}(x^*) (x - x^*)^2 + g(x), \\
     & \lim_{x \to x^*} \frac{g(x)}{(x - x^*)^2} = 0.
-\end{align}
+\end{align*}
 $$
 
 **証明** $\enspace$
 
 $$
-\begin{align*}
-    g(x) = f(x) - f(x^*) - f^\prime(x^*) (x - x^*) - \frac{1}{2} f^{\prime\prime}(x^*) (x - x^*)^2
-\end{align*}
+g(x) = f(x) - f(x^*) - f^\prime(x^*) (x - x^*) - \frac{1}{2} f^{\prime\prime}(x^*) (x - x^*)^2
 $$
 
 とすると，$x \to x^*$ のとき $g(x) \to 0$, $(x - x^*)^2 \to 0$ であり，
@@ -213,9 +207,7 @@ $$
 であるから，ロピタルの定理より
 
 $$
-\begin{equation*}
-    \lim_{x \to x^*} \frac{g(x)}{(x - x^*)^2} = \lim_{x \to x^*} \frac{g^\prime(x)}{((x - x^*)^2)^\prime} = 0
-\end{equation*}
+\lim_{x \to x^*} \frac{g(x)}{(x - x^*)^2} = \lim_{x \to x^*} \frac{g^\prime(x)}{((x - x^*)^2)^\prime} = 0
 $$
 
 が成り立つ. $\enspace$ (証明終)
@@ -224,12 +216,10 @@ $$
 
 多変数の場合はロピタルの定理が使えないので証明がちょっと面倒になる．証明には次の多変数関数の平均値の定理を使う．
 
-**定理** (平均値の定理)[^3] $\enspace$ $f(\bm{x})$ は領域 $D$ 上で定義されているとし，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分が $D$ に属するものとする．$f(\bm{x})$ が $D$ で微分可能なら，
+**定理** (平均値の定理)[^3] $\enspace$ $f$ は領域 $D$ 上で定義されているとし，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分が $D$ に属するものとする．$f$ が $D$ で微分可能なら，
 
 $$
-\begin{equation*}
-    f(\bm{x}) - f(\bm{x}^*) = \nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)
-\end{equation*}
+f(\bm{x}) - f(\bm{x}^*) = \nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*)
 $$
 
 をみたす $\theta$ $(0 < \theta < 1)$ が存在する．
@@ -248,12 +238,12 @@ $$
 **証明** $\enspace$
 
 $$
-\begin{equation*}
-    g(\bm{x}) = f(\bm{x}) - f(\bm{x}^*) - \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
-\end{equation*}
+g(\bm{x}) = f(\bm{x}) - f(\bm{x}^*) - \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 $$
 
 とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $U_\varepsilon(\bm{x}^*) \subset D$ となる $\varepsilon > 0$ が存在する[^4]．そのような $\varepsilon$ を1つ選び $U = U_\varepsilon(\bm{x}^*)$ とする．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
+
+[^4]:$U_\varepsilon(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \varepsilon \}$.
 
 $$
 \begin{align*}
@@ -268,22 +258,20 @@ $$
 \end{align*}
 $$
 
-をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能なので $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^5]
+をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能だから $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^5]
+
+[^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
 
 $$
-\begin{equation*}
-    g(\bm{x}) = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
-\end{equation*}
+g(\bm{x}) = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 $$
 
-である．$\bm{x} \in U$ 毎に上の式が成り立つような $\theta$ が存在するので，各 $\bm{x} \in U$ に対して，上の式が成り立つような $\theta$ を1つ選び $\theta(\bm{x})$ とする．
-
-上の式の右辺の各項を成分で表すと
+である．$\bm{x}$ ごとにこの式が成り立つような $\theta$ が存在するので，各 $\bm{x} \in U$ に対して，この式が成り立つような $\theta$ を1つ選び $\theta(\bm{x})$ とする．この式の右辺の各項を成分で表すと
 
 $$
 \begin{align*}
-    & (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \sum_{i = 1}^n \left(\frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*)\right) (x_i - x^*_i),
+    & (\nabla f(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \sum_{i = 1}^n \left(\frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*)\right) (x_i - x^*_i),
 \end{align*}
 $$
 
@@ -311,7 +299,7 @@ $$
 \end{align*}
 $$
 
-である．$f$ は $\bm{x}^*$ で2回微分可能であるから
+が成り立つ．$f$ は $\bm{x}^*$ で2回微分可能であるから
 
 $$
 \begin{equation*}
@@ -328,6 +316,3 @@ $$
 $$
 
 である．$\enspace$ (証明終)
-
-[^4]:$U_\varepsilon(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \varepsilon \}$.
-[^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
