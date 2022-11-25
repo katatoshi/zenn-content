@@ -241,7 +241,7 @@ $$
 g(\bm{x}) = f(\bm{x}) - f(\bm{x}^*) - \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 $$
 
-とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $U_\varepsilon(\bm{x}^*) \subset D$ となる $\varepsilon > 0$ が存在する[^4]．そのような $\varepsilon$ を1つ選び $U = U_\varepsilon(\bm{x}^*)$ とする．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
+とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $U_\varepsilon(\bm{x}^*) \subset D$ となる $\varepsilon > 0$ が存在する[^4]．そのような $\varepsilon$ を1つ選び $U = U_\varepsilon(\bm{x}^*)$ とする．いま，$\bm{x} \to \bm{x}^*$ のときの極限に興味があるので，$U$ の点についてのみ考えればよい．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
 
 [^4]:$U_\varepsilon(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \varepsilon \}$.
 
