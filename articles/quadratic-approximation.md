@@ -250,7 +250,8 @@ $$
     & g(\bm{x}) \\
     & = g(\bm{x}^*) + \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{\theta}{2} (\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{\theta}{2} (\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} \\
+    & \qquad (\bm{x} - \bm{x}^*) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & \qquad - \frac{\theta}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
@@ -263,7 +264,10 @@ $$
 [^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
 
 $$
-g(\bm{x}) = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
+\begin{align*}
+    g(\bm{x}) & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+              & \qquad - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
+\end{align*}
 $$
 
 である．$\bm{x}$ ごとにこの式が成り立つような $\theta$ が存在するので，各 $\bm{x} \in U$ に対して，この式が成り立つような $\theta$ を1つ選び $\theta(\bm{x})$ とする．この式の右辺の各項を成分で表すと
@@ -278,24 +282,22 @@ $$
 $$
 \begin{align*}
     & \theta(\bm{x}) (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
-    & = \sum_{i = 1}^n \left(\sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i)
+    & = \sum_{i = 1}^n \left(\sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i) \\
+    & = \sum_{i = 1}^n \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*)) (x_i - x^*_i)
 \end{align*}
 $$
 
-となるので
+となるので，$\varphi(\bm{x}) = \bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)$ とすると
 
 $$
 \begin{align*}
     & \left|\frac{g(\bm{x})}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
-    & = \left|\frac{\displaystyle (\nabla f(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) - \theta(\bm{x}) (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
-    & = \left|\sum_{i = 1}^n \frac{\displaystyle \left(\frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i)}{\|\bm{x} - \bm{x}^*\|^2}\right| \\
-    & = \left|\sum_{i = 1}^n \frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|} \frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
-    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|}\right| \left|\frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
-    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)}{\|\bm{x} - \bm{x}^*\|}\right| \\
-    & = \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\bm{x} - \bm{x}^*\|}\right| \\
-    & = \sum_{i = 1}^n \theta(\bm{x}) \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
-    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
-    & = \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} ((\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \bm{x}^*)}{\|(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) - \bm{x}^*\|}\right|
+    & = \left|\sum_{i = 1}^n \frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\bm{x} - \bm{x}^*\|} \frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\bm{x} - \bm{x}^*\|}\right| \left|\frac{x_i - x^*_i}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\bm{x} - \bm{x}^*\|}\right| \\
+    & = \sum_{i = 1}^n \theta(\bm{x}) \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
+    & \leq \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*))}{\|\theta(\bm{x})(\bm{x} - \bm{x}^*)\|}\right| \\
+    & = \sum_{i = 1}^n \left|\frac{\displaystyle \frac{\partial f}{\partial x_i}(\varphi(\bm{x})) - \frac{\partial f}{\partial x_i}(\bm{x}^*) - \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\varphi(\bm{x}) - \bm{x}^*)}{\|\varphi(\bm{x}) - \bm{x}^*\|}\right|
 \end{align*}
 $$
 
@@ -307,7 +309,7 @@ $$
 \end{equation*}
 $$
 
-であり，$\bm{x} \to \bm{x}^*$ のとき $(\bm{x}^* + \theta(\bm{x})(\bm{x} - \bm{x}^*)) \to \bm{x}^*$ であるから，上の不等式の最右辺は $\bm{x} \to \bm{x}^*$ のとき $0$ に収束する．よって
+であり，$\bm{x} \to \bm{x}^*$ のとき $\varphi(\bm{x}) \to \bm{x}^*$ であるから，上の不等式の最右辺は $\bm{x} \to \bm{x}^*$ のとき $0$ に収束する．よって
 
 $$
 \begin{equation*}
