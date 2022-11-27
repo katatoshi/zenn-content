@@ -248,12 +248,12 @@ $$
     & g(\bm{x}) \\
     & = g(\bm{x}^*) + \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = \nabla g(\bm{x}^* + \theta(\bm{x} - \bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{\theta}{2} (\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} \\
+    & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{1}{2} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\theta (\bm{x} - \bm{x}^*))\right)^\mathrm{T} \\
     & \qquad (\bm{x} - \bm{x}^*) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad - \frac{1}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\theta (\bm{x} - \bm{x}^*)) \\
+    & \qquad - \frac{1}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\theta (\bm{x} - \bm{x}^*))\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right)^\mathrm{T} (\theta (\bm{x} - \bm{x}^*))
+    & \qquad - \frac{1}{2} (\theta (\bm{x} - \bm{x}^*))^\mathrm{T} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right)^\mathrm{T} (\bm{x} - \bm{x}^*)
 \end{align*}
 $$
 
@@ -266,7 +266,7 @@ $$
 $$
 \begin{align*}
     g(\bm{x}) & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-              & \qquad - (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\theta (\bm{x} - \bm{x}^*))
+              & \qquad - (\theta (\bm{x} - \bm{x}^*))^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 \end{align*}
 $$
 
@@ -281,7 +281,7 @@ $$
 
 $$
 \begin{align*}
-    & (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\theta(\bm{x}) (\bm{x} - \bm{x}^*)) \\
+    & (\theta (\bm{x} - \bm{x}^*))^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
     & = \sum_{i = 1}^n \left(\sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i) \\
     & = \sum_{i = 1}^n \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*)) (x_i - x^*_i)
 \end{align*}
