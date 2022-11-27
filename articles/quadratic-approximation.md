@@ -241,9 +241,7 @@ $$
 g(\bm{x}) = f(\bm{x}) - f(\bm{x}^*) - \nabla f(\bm{x}^*)^\mathrm{T}(\bm{x} - \bm{x}^*) - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
 $$
 
-とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $U_\varepsilon(\bm{x}^*) \subset D$ となる $\varepsilon > 0$ が存在する[^4]．そのような $\varepsilon$ を1つ選び $U = U_\varepsilon(\bm{x}^*)$ とする．いま，$\bm{x} \to \bm{x}^*$ のときの極限に興味があるので，$U$ の点についてのみ考えればよい．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
-
-[^4]:$U_\varepsilon(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \varepsilon \}$.
+とすると，$g$ は $D$ で微分可能である．$D$ は開集合なので $B_\delta(\bm{x}^*) = \{\bm{x} \mid \|\bm{x} - \bm{x}^*\| < \delta \} \subset D$ となる $\delta > 0$ が存在する．そのような $\delta$ を1つ選び $U = B_\delta(\bm{x}^*)$ とする．いま，$\bm{x} \to \bm{x}^*$ のときの極限に興味があるので，$U$ の点についてのみ考えればよい．$\bm{x} \in U$ とすると，$\bm{x}^*$, $\bm{x}$ およびこの2点を結ぶ線分は $U$ に属するので，平均値の定理より
 
 $$
 \begin{align*}
@@ -253,20 +251,20 @@ $$
     & = \left(\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*) - \frac{\theta}{2} (\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} \\
     & \qquad (\bm{x} - \bm{x}^*) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad - \frac{\theta}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\bm{x} - \bm{x}^*) \\
+    & \qquad - \frac{1}{2} \left(\left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right) (\bm{x} - \bm{x}^*)\right)^\mathrm{T} (\theta (\bm{x} - \bm{x}^*)) \\
     & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-    & \qquad - \frac{\theta}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right)^\mathrm{T} (\bm{x} - \bm{x}^*)
+    & \qquad - \frac{1}{2} (\bm{x} - \bm{x}^*)^\mathrm{T} \left(\nabla^2 f(\bm{x}^*) + \nabla^2 f(\bm{x}^*)^\mathrm{T}\right)^\mathrm{T} (\theta (\bm{x} - \bm{x}^*))
 \end{align*}
 $$
 
-をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能だから $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^5]
+をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能だから $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^4]
 
-[^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
+[^4]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
 
 $$
 \begin{align*}
     g(\bm{x}) & = (\nabla f(\bm{x}^* + \theta(\bm{x} - \bm{x}^*)) - \nabla f(\bm{x}^*))^\mathrm{T} (\bm{x} - \bm{x}^*) \\
-              & \qquad - \theta (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*)
+              & \qquad - (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\theta (\bm{x} - \bm{x}^*))
 \end{align*}
 $$
 
@@ -281,7 +279,7 @@ $$
 
 $$
 \begin{align*}
-    & \theta(\bm{x}) (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\bm{x} - \bm{x}^*) \\
+    & (\bm{x} - \bm{x}^*)^\mathrm{T} \nabla^2 f(\bm{x}^*) (\theta(\bm{x}) (\bm{x} - \bm{x}^*)) \\
     & = \sum_{i = 1}^n \left(\sum_{j = 1}^n \frac{\partial^2 f}{\partial x_j \partial x_i}(\bm{x}^*) \theta(\bm{x}) (x_j - x^*_j)\right) (x_i - x^*_i) \\
     & = \sum_{i = 1}^n \nabla \frac{\partial f}{\partial x_i}(\bm{x}^*)^\mathrm{T} (\theta(\bm{x}) (\bm{x} - \bm{x}^*)) (x_i - x^*_i)
 \end{align*}
