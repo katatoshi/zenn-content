@@ -257,9 +257,11 @@ $$
 \end{align*}
 $$
 
-をみたす $\theta$ $(0 < \theta < 1)$ が存在する．$f$ は $\bm{x}^*$ で2回微分可能だから $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^4]
+をみたす $\theta$ $(0 < \theta < 1)$ が存在する[^4]．$f$ は $\bm{x}^*$ で2回微分可能だから $\nabla^2 f(\bm{x}^*)$ は対称行列となるので[^5]
 
-[^4]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
+[^4]:$\bm{c} \in \bm{R}^n$, $Q \in \bm{R}^{n \times n}$ とするとき $\nabla(\bm{c}^\mathrm{T} \bm{x}) = \bm{c}$, $\nabla(\bm{x}^\mathrm{T} Q \bm{x}) = (Q + Q^\mathrm{T})\bm{x}$.
+
+[^5]:$f$ が $\bm{x}^*$ で2回微分可能なら $\frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j}$ $(i, j = 1, \cdots, n)$ が成り立つ．笠原 定理5.10.
 
 $$
 \begin{align*}
