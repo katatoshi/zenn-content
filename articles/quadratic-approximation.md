@@ -6,7 +6,7 @@ topics:
   - "数学"
   - "最適化"
   - "微分積分"
-published: false
+published: true
 ---
 
 # はじめに
