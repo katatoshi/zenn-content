@@ -6,7 +6,7 @@ topics:
   - "数学"
   - "線形代数"
   - "線型代数"
-published: false
+published: true
 ---
 
 # はじめに
